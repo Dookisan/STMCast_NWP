@@ -7,8 +7,7 @@ class MEASUREMENT:
         self.temp = temp
         self.pressure = pressure
         self.time = time
-        self.error = self._estimation_error
-        
+
     def __str__(self):
         return f"Wind: {self.wind}, Temp: {self.temp}, Pressure: {self.pressure}, Time: {self.time}"
 
@@ -21,8 +20,6 @@ class ERROR ():
         self.MODEL = MODEL
         self.CAST = CAST
 
-        self.error = self._estimation_error
-
     
     @property
     def _estimation_error(self)->np.array:
@@ -32,6 +29,13 @@ class ERROR ():
         --------------------------
         The vector of estimation errors ek
         """
-        print("Not implemented yet")
 
-        
+        dwind = self.MODEL.wind - self.CAST.wind
+        dtemp = self.MODEL.temp - self.CAST.temp
+        dpress = self.MODEL.pressure - self.CAST.pressure  
+
+        return np.array([dwind, dtemp, dpress])
+
+    @property
+    def error(self):
+        return self._estimation_error   
