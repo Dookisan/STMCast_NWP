@@ -8,3 +8,9 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Test cpp files 
+*.h
+*.cpp
+cpp_version/
+Makefile
